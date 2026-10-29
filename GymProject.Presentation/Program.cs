@@ -1,3 +1,5 @@
+using GymProject.BussinessLogic.Services.Classes;
+using GymProject.BussinessLogic.Services.Interfaces;
 using GymProject.DataAccess.Data.Contexts;
 using GymProject.DataAccess.Data.Seeder;
 using GymProject.DataAccess.Repositories.Classes;
@@ -11,6 +13,9 @@ builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddScoped<IPlanServices, PlanServices>();
+builder.Services.AddScoped<ITrainerService, TrainerService>();
 
 var app = builder.Build();
 

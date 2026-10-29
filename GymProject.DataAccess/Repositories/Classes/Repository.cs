@@ -20,25 +20,27 @@ namespace GymProject.DataAccess.Repositories.Classes
 
         public async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         => await _set.FindAsync(id, cancellationToken);
-        public void Add(TEntity entity)
+       public async Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             _set.Add(entity);
-        
+
+            return await dbContext.SaveChangesAsync(cancellationToken);
 
         }
 
-        public void Delete(TEntity entity)
+        public async Task<int> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             _set.Remove(entity);
-             
+           return await dbContext.SaveChangesAsync(cancellationToken);  
         }
 
 
 
-        public void Update(TEntity entity )
+       public async Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             _set.Update(entity);
-        
+            return await dbContext.SaveChangesAsync(cancellationToken);
+
         }
 
         public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
