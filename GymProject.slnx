@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="GymProject.BussinessLogic/GymProject.BussinessLogic.csproj" Id="f83e2d9e-7b7f-418d-a665-8f97c1510dcb" />
   <Project Path="GymProject.DataAccess/GymProject.DataAccess.csproj" Id="f87931b9-1cf1-448a-84ba-b4086799b4a6" />
-  <Project Path="GymProject/GymProject.Presentation.csproj" />
+  <Project Path="GymProject.Presentation/GymProject.Presentation.csproj" />
 </Solution>
