@@ -1,14 +1,14 @@
-﻿using GymProject.Data.Contexts;
-using GymProject.Models;
+﻿using GymProject.DataAccess.Data.Contexts;
+using GymProject.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymProject.Data.Seeder
+namespace GymProject.DataAccess.Data.Seeder
 {
     public static class PlanSeeder
     {
-        public static async Task SeedAsync()
+        public static async Task SeedAsync(AppDbContext dbContext)
         {
-            using var dbContext = new AppDbContext();
+            
 
             bool hasAnyPlans = await dbContext.Plans.AnyAsync();
 

@@ -1,17 +1,18 @@
-﻿
-using GymProject.Data.Contexts;
+﻿using GymProject.DataAccess.Data.Contexts;
+using GymProject.DataAccess.Models;
+using GymProject.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace GymProject.Controllers
+namespace GymProject.Presentation.Controllers
 {
-    public class PlansController:Controller
+    public class PlansController(IRepository<Plan> repo):Controller
     {
-        public AppDbContext dbContext = new AppDbContext();
-        public async Task<IActionResult> Index()
+   
+        public async Task<IActionResult> Index(CancellationToken ct)
         {
-            var plans = await dbContext.Plans.ToListAsync();
+            var plans = await repo.GetAllAsync(cancellationToken:ct);
             return View(plans);
         }
         public async Task<IActionResult> Details(int id)
@@ -20,7 +21,7 @@ namespace GymProject.Controllers
             {
                 return NotFound();
             }
-            var plan = await dbContext.Plans.FindAsync(id);
+            var plan = await repo.GetByIdAsync(id);
             if(plan is null)
             {
                 return RedirectToAction(nameof(Index));
