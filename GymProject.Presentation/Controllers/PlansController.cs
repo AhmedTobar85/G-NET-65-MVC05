@@ -1,10 +1,6 @@
 ﻿using GymProject.BussinessLogic.Services.Interfaces;
 using GymProject.BussinessLogic.ViewModels.PlanViewModel;
-using GymProject.DataAccess.Data.Contexts;
-using GymProject.DataAccess.Models;
-using GymProject.DataAccess.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace GymProject.Presentation.Controllers
@@ -68,3 +64,4 @@ namespace GymProject.Presentation.Controllers
         }
     }
 }
+

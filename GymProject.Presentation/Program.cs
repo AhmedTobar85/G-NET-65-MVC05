@@ -1,3 +1,4 @@
+using GymProject.BussinessLogic;
 using GymProject.BussinessLogic.Services.Classes;
 using GymProject.BussinessLogic.Services.Interfaces;
 using GymProject.DataAccess.Data.Contexts;
@@ -8,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.GetConnectionString("DefaultConnection");
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -16,6 +19,14 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IMemberService, MemberService>();
 builder.Services.AddScoped<IPlanServices, PlanServices>();
 builder.Services.AddScoped<ITrainerService, TrainerService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<ISessionServices, SessionServices>();
+builder.Services.AddAutoMapper(m => m.AddProfile(new MappingProfile()));
+
+
+
 
 var app = builder.Build();
 

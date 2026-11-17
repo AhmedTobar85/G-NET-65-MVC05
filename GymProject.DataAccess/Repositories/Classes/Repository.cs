@@ -20,26 +20,24 @@ namespace GymProject.DataAccess.Repositories.Classes
 
         public async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         => await _set.FindAsync(id, cancellationToken);
-       public async Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public void Add(TEntity entity)
         {
             _set.Add(entity);
 
-            return await dbContext.SaveChangesAsync(cancellationToken);
 
         }
 
-        public async Task<int> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public void Delete(TEntity entity)
         {
             _set.Remove(entity);
-           return await dbContext.SaveChangesAsync(cancellationToken);  
+
         }
 
 
 
-       public async Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public void Update(TEntity entity)
         {
             _set.Update(entity);
-            return await dbContext.SaveChangesAsync(cancellationToken);
 
         }
 
@@ -48,7 +46,7 @@ namespace GymProject.DataAccess.Repositories.Classes
             return _set.AsNoTracking().AnyAsync(predicate, cancellationToken);
         }
 
-        public async Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, bool tracking=false, CancellationToken cancellationToken = default)
+        public async Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> query = tracking ? _set : _set.AsNoTracking();
             return await query.FirstOrDefaultAsync(predicate);

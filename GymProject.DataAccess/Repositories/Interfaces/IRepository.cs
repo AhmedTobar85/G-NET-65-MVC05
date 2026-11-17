@@ -6,14 +6,15 @@ using System.Text;
 
 namespace GymProject.DataAccess.Repositories.Interfaces
 {
+
     public interface IRepository<TEntity> where TEntity : BaseEntity, new()
     {
         Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = false, CancellationToken cancellationToken = default);
 
-        Task<int> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
-        Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
-        Task<int> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
 
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 

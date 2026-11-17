@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GymProject.BussinessLogic.ViewModels.SessionViewModel
 {
-    public class SessionIndexViewModel
+    public partial class SessionIndexViewModel
     {
         public int Id { get; set; }
         public string Description { get; set; } = default!;
@@ -33,7 +33,5 @@ namespace GymProject.BussinessLogic.ViewModels.SessionViewModel
 
            }
         }
-
-
     }
 }
